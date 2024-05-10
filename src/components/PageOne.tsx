@@ -1,3 +1,4 @@
+import '../App.css'
 import React from 'react';
 import { CustomerForm } from './CustomerForm';
 
@@ -9,8 +10,8 @@ export const PageOne: React.FC = () => {
   //   const darkModeUrl = `${appUrl}/dark-mode`
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <iframe style={{ display: "flex", width: "50%" }} src={lightModeUrl}></iframe>
+    <div className='wrapper'>
+      <iframe src={lightModeUrl}></iframe>
       <CustomerForm />
     </div>
   );
