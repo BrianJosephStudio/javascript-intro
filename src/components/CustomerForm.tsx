@@ -7,7 +7,7 @@ interface FormData {
   phone: string;
 }
 
-export const CustomerForm: React.FC = () => {
+export const CustomerForm = ({ themeSwitch = false }: { themeSwitch?: Boolean}) => {
   const logo = useRef<HTMLImageElement>(null)
   const container = useRef<HTMLDivElement>(null)
   const header = useRef<HTMLHeadingElement>(null)
@@ -69,7 +69,10 @@ export const CustomerForm: React.FC = () => {
           <img ref={logo} src="./compass-logo-light.svg" alt=""></img>
         </div>
         <div onClick={handleThemeSwap}>
-          <ThemeSwitch theme={themeMode}></ThemeSwitch>
+          {
+            !!themeSwitch &&
+            <ThemeSwitch theme={themeMode}></ThemeSwitch>
+          }
         </div>
       </div>
       <h2 ref={header}>Contact Details</h2>
