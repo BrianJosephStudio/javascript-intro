@@ -1,0 +1,151 @@
+html {
+    display: flex;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    margin: 0;
+    /* padding: 0.2rem; */
+    width: inherit;
+    height: inherit;
+    background-color: #f9f9f9;
+    overflow: hidden;
+}
+
+.container {
+    place-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    border-radius: 1rem;
+}
+
+h2 {
+    font-family: "Ubuntu Sans", sans-serif;
+    text-align: center;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.navBar {
+    display: grid;
+    width: 100%;
+    height: 4rem;
+    grid-template-columns: repeat(5, 20%);
+}
+
+.logo {
+    display: flex;
+    /* justify-self: center; */
+    grid-column: 2 / 5;
+    justify-content: center;
+}
+
+img {
+    max-height: 4rem;
+    min-height: 4rem;
+    align-self: center;
+    justify-self: center;
+}
+
+.themeSwitch {
+    justify-self: flex-end;
+    align-self: flex-start;
+    width: 2.4rem;
+    background-color: #c3c3c3;
+    color: #fff;
+    border: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    grid-column: 5;
+}
+
+.themeButton {
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+    background-color: #4c6baf;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    text-align: start;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    /* font-weight: bold; */
+    margin-bottom: 5px;
+    color: #555;
+    font-family: "Ubuntu Sans", sans-serif;
+}
+
+input {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: "Ubuntu Sans", sans-serif;
+    width: inherit;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 0;
+    background-color: #4c6baf;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #6f89bf;
+}
+
+/* @media screen and (max-height: 440px) {
+    html {
+        font-size: 12px;
+    }
+
+    .container {
+        height: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+
+} */
+
+@media screen and (max-width: 300px) {
+    .container {
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+}
