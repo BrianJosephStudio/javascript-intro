@@ -2,12 +2,9 @@ import { useState, useEffect, useRef, } from 'react';
 import { ThemeSwitch } from './ThemeSwitch';
 import { FormGroup } from './FormGroup';
 import { UserDetailsContext } from '../util/context/UserDetailsContext';
+import { state, FormData } from '../types';
 
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-}
+
 
 export const CustomerForm = ({
   themeSwitch = false,
@@ -20,7 +17,7 @@ export const CustomerForm = ({
   const container = useRef<HTMLDivElement>(null)
   const header = useRef<HTMLHeadingElement>(null)
 
-  const [themeMode, setThemeMode] = useState<"light" | "dark">("light")
+  const [theme, setThemeMode] = useState<"light" | "dark">("light")
   const [buttonEnabled, setButtonEnabled] = useState<boolean>(true)
   const [formData, setFormData] = useState<FormData>({
     name: 'John Doe',
@@ -29,24 +26,23 @@ export const CustomerForm = ({
   });
 
   const handleThemeSwap = () => {
-    console.log("check", themeMode)
-    setThemeMode(themeMode === 'light' ? 'dark' : 'light')
+    setThemeMode(theme === 'light' ? 'dark' : 'light')
   }
 
   const checkInputs = () => {
     let invalid = false
 
     const invalidInputs = container.current?.querySelectorAll<HTMLElement>('#invalidInput')
-    
+
     invalidInputs?.forEach((invalidInput) => {
       if (invalidInput.dataset.invalid === "true") {
         invalid = true
       }
     })
 
-    if(invalid){
+    if (invalid) {
       setButtonEnabled(false)
-    }else{
+    } else {
       setButtonEnabled(true)
     }
   }
@@ -58,27 +54,27 @@ export const CustomerForm = ({
       !header.current
     ) { return }
 
-    logo.current.src = logo.current.src.replace(/(light)|(dark)/, themeMode)
-    container.current.style.backgroundColor = themeMode === 'light' ? '#f9f9f9' : '#2e2e2e'
-    header.current.style.color = themeMode === 'light' ? '#3d3d3d' : 'white'
+    logo.current.src = logo.current.src.replace(/(light)|(dark)/, theme)
+    container.current.style.backgroundColor = theme === 'light' ? '#f9f9f9' : '#2e2e2e'
+    header.current.style.color = theme === 'light' ? '#3d3d3d' : 'white'
 
     const labels = [...container.current!.querySelectorAll('label')]
     const inputs = [...container.current!.querySelectorAll('input')]
 
-    labels.forEach((label) => label.style.color = themeMode === 'light' ? '#3d3d3d' : 'white')
+    labels.forEach((label) => label.style.color = theme === 'light' ? '#3d3d3d' : 'white')
     inputs.forEach((input) => {
-      if (themeMode === "light") {
+      if (theme === "light") {
         input.style.color = '#3d3d3d'
         input.style.backgroundColor = 'white'
         input.style.borderColor = '#cccccc'
-      } else if (themeMode === 'dark') {
+      } else if (theme === 'dark') {
         input.style.color = 'white'
         // input.style.backgroundColor = '#3d3d3d'
         input.style.backgroundColor = '#2e2e2e'
         input.style.borderColor = '#616161'
       }
     })
-  }, [themeMode])
+  }, [theme])
 
   return (
     <div ref={container} className='container'>
@@ -89,14 +85,14 @@ export const CustomerForm = ({
         <div onClick={handleThemeSwap}>
           {
             !!themeSwitch &&
-            <ThemeSwitch theme={themeMode}></ThemeSwitch>
+            <ThemeSwitch theme={theme}></ThemeSwitch>
           }
         </div>
       </div>
       <h2 ref={header}>Contact Details</h2>
       <form onSubmit={undefined}>
 
-        <UserDetailsContext.Provider value={{ formData, setFormData, checkInputs }}>
+        <UserDetailsContext.Provider value={{ formData, setFormData, checkInputs, theme }}>
           <FormGroup
             title='Name'
             id='name'
