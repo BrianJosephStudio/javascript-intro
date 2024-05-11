@@ -206,14 +206,16 @@ select {
 }
 
 .invalidAlert{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "Ubuntu Sans", sans-serif;
-  background-color: rgb(240, 176, 176);
-  font-size: 0.9rem;
-  height: 1rem;
+  font-size: 0.8rem;
+  height: 1.2rem;
   color: white;
-  padding: 0.3rem 0.8rem;
+  width: 3.6rem;
+  /* padding: 0.3rem 0.8rem; */
   border-radius: 1rem;
   margin-left: 0.5rem;
-  margin-bottom: 0.2rem;
-  transition: opacity 0.4s;
+  transition: 0.4s;
 }
