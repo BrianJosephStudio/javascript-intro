@@ -12,7 +12,10 @@ export const PageOne: React.FC = () => {
   return (
     <div className='wrapper'>
       <iframe src={lightModeUrl}></iframe>
-      <CustomerForm themeSwitch={true} />
+      <CustomerForm
+        themeSwitch={true}
+        validateInput={false}
+       />
     </div>
   );
 };

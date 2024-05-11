@@ -14,7 +14,10 @@ function App() {
     },
     {
       path: "/customer-form",
-      element: <CustomerForm />,
+      element: <CustomerForm
+      themeSwitch={true}
+      validateInput={true}
+     />,
     },
   ])
 
