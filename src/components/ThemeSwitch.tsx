@@ -5,7 +5,6 @@ export function ThemeSwitch({ theme }: { theme: any }) {
     const [margin, setMargin] = useState("0")
 
     useEffect(() => {
-        console.log(theme)
         if (theme === "light") {
             setBackgroundColor("#c3c3c3")
             setMargin('0')
