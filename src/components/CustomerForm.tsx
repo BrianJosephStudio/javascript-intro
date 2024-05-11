@@ -1,5 +1,7 @@
-import React, { useState, ChangeEvent, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, } from 'react';
 import { ThemeSwitch } from './ThemeSwitch';
+import { FormGroup } from './FormGroup';
+import { UserDetailsContext } from '../util/context/UserDetailsContext';
 
 interface FormData {
   name: string;
@@ -7,30 +9,46 @@ interface FormData {
   phone: string;
 }
 
-export const CustomerForm = ({ themeSwitch = false }: { themeSwitch?: Boolean}) => {
+export const CustomerForm = ({
+  themeSwitch = false,
+  validateInput = false
+}: {
+  themeSwitch?: Boolean,
+  validateInput: boolean
+}) => {
   const logo = useRef<HTMLImageElement>(null)
   const container = useRef<HTMLDivElement>(null)
   const header = useRef<HTMLHeadingElement>(null)
 
-
   const [themeMode, setThemeMode] = useState<"light" | "dark">("light")
+  const [buttonEnabled, setButtonEnabled] = useState<boolean>(true)
   const [formData, setFormData] = useState<FormData>({
     name: 'John Doe',
     email: 'johndoe@email.com',
     phone: '+13024562353'
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
   const handleThemeSwap = () => {
     console.log("check", themeMode)
     setThemeMode(themeMode === 'light' ? 'dark' : 'light')
+  }
+
+  const checkInputs = () => {
+    let invalid = false
+
+    const invalidInputs = container.current?.querySelectorAll<HTMLElement>('#invalidInput')
+    
+    invalidInputs?.forEach((invalidInput) => {
+      if (invalidInput.dataset.invalid === "true") {
+        invalid = true
+      }
+    })
+
+    if(invalid){
+      setButtonEnabled(false)
+    }else{
+      setButtonEnabled(true)
+    }
   }
 
   useEffect(() => {
@@ -77,19 +95,28 @@ export const CustomerForm = ({ themeSwitch = false }: { themeSwitch?: Boolean}) 
       </div>
       <h2 ref={header}>Contact Details</h2>
       <form onSubmit={undefined}>
-        <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-        </div>
-        <div className="form-group">
-          <label htmlFor="phone">Phone Number:</label>
-          <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required />
-        </div>
-        <button type="submit" className="btn">Next</button>
+
+        <UserDetailsContext.Provider value={{ formData, setFormData, checkInputs }}>
+          <FormGroup
+            title='Name'
+            id='name'
+            validateInput={validateInput}
+          ></FormGroup>
+
+          <FormGroup
+            title='Email'
+            id='email'
+            validateInput={validateInput}
+          ></FormGroup>
+
+          <FormGroup
+            title='Phone'
+            id='phone'
+            validateInput={validateInput}
+          ></FormGroup>
+        </UserDetailsContext.Provider>
+
+        <button type="submit" className={`btn${buttonEnabled === false ? " btn-locked" : ""}`} disabled={!buttonEnabled}>Next</button>
       </form>
     </div>
   );
