@@ -173,7 +173,16 @@ select {
 }
 
 .btn:hover {
-    background-color: #6f89bf;
+  background-color: #6f89bf;
+}
+
+.btn-locked{
+  background-color: #cfcfcf;
+  cursor: default;
+}
+
+.btn-locked:hover{
+  background-color: #cfcfcf;
 }
 
 .circle{
@@ -194,4 +203,17 @@ select {
 }
 .themeSwitch:hover{
   background-color: black;
+}
+
+.invalidAlert{
+  font-family: "Ubuntu Sans", sans-serif;
+  background-color: rgb(240, 176, 176);
+  font-size: 0.9rem;
+  height: 1rem;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 1rem;
+  margin-left: 0.5rem;
+  margin-bottom: 0.2rem;
+  transition: opacity 0.4s;
 }
