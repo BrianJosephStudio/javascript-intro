@@ -82,12 +82,10 @@ export const CustomerForm = ({
         <div className="logo">
           <img ref={logo} src="./compass-logo-light.svg" alt=""></img>
         </div>
-        <div onClick={handleThemeSwap}>
-          {
-            !!themeSwitch &&
-            <ThemeSwitch theme={theme}></ThemeSwitch>
-          }
+        {!!themeSwitch && <div onClick={handleThemeSwap}>
+          <ThemeSwitch theme={theme}></ThemeSwitch>
         </div>
+        }
       </div>
       <h2 ref={header}>Contact Details</h2>
       <form onSubmit={undefined}>
