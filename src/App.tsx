@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import { PageOne } from './components/PageOne.tsx'
 import { CustomerForm } from './components/CustomerForm.tsx';
+import { PerformancePanel } from './components/PerformancePanel.tsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -18,6 +19,10 @@ function App() {
       themeSwitch={true}
       validateInput={true}
      />,
+    },
+    {
+      path: "/performance-monitor",
+      element: <PerformancePanel/>,
     },
   ])
 
