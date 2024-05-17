@@ -1,6 +1,4 @@
 html {
-    display: flex;
-    margin: 0;
     height: 100%;
     width: 100%;
 }
@@ -13,7 +11,7 @@ body {
     justify-content: center;
     margin: 0;
     /* padding: 0.2rem; */
-    width: inherit;
+    /* width: inherit; */
     height: inherit;
     background-color: #f9f9f9;
     overflow: hidden;
@@ -29,6 +27,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
     border-radius: 1rem;
+    /* width: 22rem; */
 }
 
 h2 {
@@ -108,7 +107,6 @@ input {
     border-radius: 5px;
     font-size: 1rem;
     font-family: "Ubuntu Sans", sans-serif;
-    width: inherit;
 }
 
 .btn {
@@ -122,6 +120,7 @@ input {
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s;
+    margin-top: 2rem;
 }
 
 .btn:hover {
