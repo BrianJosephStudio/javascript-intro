@@ -1,6 +1,7 @@
 import '../App.css'
 import React from 'react';
 import { CustomerForm } from './CustomerForm';
+import { PerformancePanel } from './PerformancePanel';
 
 
 
@@ -10,12 +11,15 @@ export const PageOne: React.FC = () => {
   //   const darkModeUrl = `${appUrl}/dark-mode`
 
   return (
-    <div className='wrapper'>
-      <iframe src={lightModeUrl}></iframe>
-      <CustomerForm
-        themeSwitch={true}
-        validateInput={false}
-       />
-    </div>
+    <>
+      <div className='wrapper'>
+        <iframe src={lightModeUrl}></iframe>
+        <CustomerForm
+          themeSwitch={true}
+          validateInput={false}
+        />
+      </div>
+      <PerformancePanel></PerformancePanel>
+    </>
   );
 };
