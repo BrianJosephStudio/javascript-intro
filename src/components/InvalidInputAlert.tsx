@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { UserDetailsContext } from "../util/context/UserDetailsContext"
+import { UserDetailsContext } from "../util/context/Contexts"
 
 const defaultErrorMessage = "invalid"
 
