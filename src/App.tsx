@@ -11,7 +11,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/1",
-      element: <PageOne />,
+      element: <PageOne/>,
     },
     {
       path: "/customer-form",
@@ -23,8 +23,12 @@ function App() {
     {
       path: "/performance-monitor",
       element: <PerformancePanel/>,
-    },
-  ])
+    }
+  ],
+  {
+    basename: "/apps/javascript-intro"
+  }
+)
 
   return (
       <RouterProvider router={router} />
