@@ -15,3 +15,9 @@ export interface FormData {
     LIGHT = 'light',
     DARK = 'dark',
 }
+
+export interface PerformanceEvent{
+  start: PerformanceMark
+  end: PerformanceMark
+  duration: number
+}

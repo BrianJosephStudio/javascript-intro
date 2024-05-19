@@ -1,17 +1,20 @@
-import { useState, useEffect, useRef, } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { ThemeSwitch } from './ThemeSwitch';
 import { FormGroup } from './FormGroup';
-import { UserDetailsContext } from '../util/context/UserDetailsContext';
-import { state, FormData } from '../types';
+import { UserDetailsContext } from '../util/context/Contexts';
+import { FormData } from '../types';
+import { PerformanceStatsContext } from '../util/context/Contexts';
 
 
 
 export const CustomerForm = ({
   themeSwitch = false,
-  validateInput = false
+  validateInput = false,
+  measurePerformance = false
 }: {
-  themeSwitch?: Boolean,
-  validateInput: boolean
+  themeSwitch?: boolean,
+  validateInput?: boolean,
+  measurePerformance?: boolean
 }) => {
   const logo = useRef<HTMLImageElement>(null)
   const container = useRef<HTMLDivElement>(null)
@@ -24,6 +27,9 @@ export const CustomerForm = ({
     email: 'johndoe@email.com',
     phone: '+13024562353'
   });
+
+  //@ts-ignore
+  const {createPerformanceLog} = useContext(PerformanceStatsContext)
 
   const handleThemeSwap = () => {
     setThemeMode(theme === 'light' ? 'dark' : 'light')
@@ -53,6 +59,9 @@ export const CustomerForm = ({
       !container.current ||
       !header.current
     ) { return }
+    const performance = window.performance
+    const markName = Date.now().toString()
+    const start = performance.mark(markName)
 
     logo.current.src = logo.current.src.replace(/(light)|(dark)/, theme)
     container.current.style.backgroundColor = theme === 'light' ? '#f9f9f9' : '#2e2e2e'
@@ -74,6 +83,11 @@ export const CustomerForm = ({
         input.style.borderColor = '#616161'
       }
     })
+    
+    const end = performance.mark(markName)
+    if(measurePerformance){
+      createPerformanceLog(start,end)
+    }
   }, [theme])
 
   return (
