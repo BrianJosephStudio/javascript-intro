@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap"
+    rel="stylesheet">
+  <title>Contact Details</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="navBar">
+      <div id="target" class="logo">
+        <img src="./compass-logo-light.svg" alt="">
+      </div>
+      <a id="themeSwitch" class="themeSwitch" href="http://localhost:5000/apps/javascript-intro/dark-mode" class="button">
+        <div class="themeButton"></div>
+      </a>
+    </div>
+    <h2>Contact Details</h2>
+    <form action="https://example.com/submit" method="post">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input value="John Doe" type="text" id="name" name="name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input value="johndoe@email.com" type="email" id="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input value="+13024562353" type="tel" id="phone" name="phone" required />
+      </div>
+      <button type="submit" class="btn">Next</button>
+    </form>
+  </div>
+</body>
+
+</html>
