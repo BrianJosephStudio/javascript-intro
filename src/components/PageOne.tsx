@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { CustomerForm } from './CustomerForm';
 import { PerformancePanel } from './PerformancePanel';
 import { PerformanceStatsContext } from '../util/context/Contexts';
-import { PerformanceEvent } from '../types';
+import { PerformanceEvent, MeasurementInput } from '../types';
 
 export const PageOne: React.FC = () => {
   const appUrl = import.meta.env.VITE_APP_URL
@@ -34,18 +34,19 @@ export const PageOne: React.FC = () => {
       return
     }
     const end = window.performance.mark(openPerformanceMarkName)
-    createPerformanceLog(openPerformanceMark, end)
+    createPerformanceLog(openPerformanceMark, end, MeasurementInput.A)
     setOpenPerformanceMark(null)
     setOpenPerformanceMarkName(null)
   }
 
-  const createPerformanceLog = (start: PerformanceMark, end: PerformanceMark): void => {
+  const createPerformanceLog = (start: PerformanceMark, end: PerformanceMark, measurementInput: MeasurementInput): void => {
     setPerformanceEvents([
       ...performanceEvents,
       {
         start,
         end,
-        duration: end.startTime - start.startTime
+        duration: end.startTime - start.startTime,
+        measurementInput: measurementInput
       }
     ])
   }
@@ -77,16 +78,20 @@ export const PageOne: React.FC = () => {
 
   useEffect(() => {
     if (performanceEvents.length === 0) return;
-  
+
     const { duration } = performanceEvents[performanceEvents.length - 1];
     const formattedDuration = duration.toFixed(2);
-  
+
     console.log(`This action took ${formattedDuration} milliseconds to complete`);
   }, [performanceEvents]);
-  
+
 
   return (
-    <PerformanceStatsContext.Provider value={{ createPerformanceLog }}>
+    <PerformanceStatsContext.Provider value={{
+      createPerformanceLog,
+      performanceEvents
+    }}>
+      <PerformancePanel></PerformancePanel>
       <div className='wrapper'>
         <iframe onLoad={(event) => addPerformanceListeners(event)} ref={iframe} src={lightModeUrl}></iframe>
         <CustomerForm
@@ -95,7 +100,6 @@ export const PageOne: React.FC = () => {
           measurePerformance={true}
         />
       </div>
-      <PerformancePanel></PerformancePanel>
     </PerformanceStatsContext.Provider>
   );
 };

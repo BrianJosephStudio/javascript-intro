@@ -20,10 +20,15 @@ export interface PerformanceEvent{
   start: PerformanceMark
   end: PerformanceMark
   duration: number
-  sourceForm: SourceForm
+  measurementInput: MeasurementInput
 }
 
-export enum SourceForm {
-  JS = 'js',
-  NOJS = 'noJs'
+export enum MeasurementInput {
+  A = 'a',
+  B = 'b'
+}
+
+export interface PerformanceMeasurement {
+  percentage: number
+  difference: number
 }

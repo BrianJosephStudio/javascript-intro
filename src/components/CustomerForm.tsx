@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useContext } from 'react';
 import { ThemeSwitch } from './ThemeSwitch';
 import { FormGroup } from './FormGroup';
 import { UserDetailsContext } from '../util/context/Contexts';
-import { FormData } from '../types';
+import { FormData, MeasurementInput } from '../types';
 import { PerformanceStatsContext } from '../util/context/Contexts';
 
 
@@ -20,6 +20,7 @@ export const CustomerForm = ({
   const container = useRef<HTMLDivElement>(null)
   const header = useRef<HTMLHeadingElement>(null)
 
+  const [isFirstMount, setIsFirstMount] = useState<boolean>(true)
   const [theme, setThemeMode] = useState<"light" | "dark">("light")
   const [buttonEnabled, setButtonEnabled] = useState<boolean>(true)
   const [formData, setFormData] = useState<FormData>({
@@ -29,7 +30,7 @@ export const CustomerForm = ({
   });
 
   //@ts-ignore
-  const {createPerformanceLog} = useContext(PerformanceStatsContext)
+  const { createPerformanceLog } = useContext(PerformanceStatsContext)
 
   const handleThemeSwap = () => {
     setThemeMode(theme === 'light' ? 'dark' : 'light')
@@ -54,11 +55,16 @@ export const CustomerForm = ({
   }
 
   useEffect(() => {
+    if (isFirstMount) {
+      setIsFirstMount(false)
+      return
+    }
     if (
       !logo.current ||
       !container.current ||
       !header.current
     ) { return }
+
     const performance = window.performance
     const markName = Date.now().toString()
     const start = performance.mark(markName)
@@ -83,10 +89,11 @@ export const CustomerForm = ({
         input.style.borderColor = '#616161'
       }
     })
-    
+
     const end = performance.mark(markName)
-    if(measurePerformance){
-      createPerformanceLog(start,end)
+    if (measurePerformance) {
+      createPerformanceLog(start,end, MeasurementInput.B)
+      
     }
   }, [theme])
 
