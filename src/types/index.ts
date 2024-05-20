@@ -20,4 +20,10 @@ export interface PerformanceEvent{
   start: PerformanceMark
   end: PerformanceMark
   duration: number
+  sourceForm: SourceForm
+}
+
+export enum SourceForm {
+  JS = 'js',
+  NOJS = 'noJs'
 }
