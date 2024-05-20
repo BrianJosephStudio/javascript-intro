@@ -86,6 +86,14 @@ h2 {
   transition: color 0.2s ease-out;
 }
 
+h3 {
+  font-family: "Ubuntu Sans", sans-serif;
+  text-align: center;
+  color: #333;
+  font-size: 0.8rem;
+  transition: color 0.2s ease-out;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
